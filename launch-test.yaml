@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  postgres:
+    image: postgres
+    container_name: postgresql_steam
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=nikslav
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=steam
+
+
+  steam:
+    image: steam-backend:latest
+    container_name: steam-back
+    ports:
+      - 13869:13869
+
+
