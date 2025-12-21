@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -26,11 +27,10 @@ public class GeneralManager {
     }
 
     @GetMapping("/all")
-    public Map<String, Object> getLatestData(){
+    public Map<String, Object> getLatestData(@RequestParam("number_limit") int limit){
         Map<String,Object> map=new HashMap<>();
-        map.put("camera",  cameraPeopleDao.getLatestCameraPeopleNumber(3));
-        map.put("temp", null);
-        map.put("hum", null);
+        map.put("camera",  cameraPeopleDao.getLatestCameraPeopleNumber(limit));
+        map.put("distance", null);
 
         return map;
     }
