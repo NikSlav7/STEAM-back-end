@@ -1,6 +1,7 @@
 package com.example.steam2.managers;
 
 import com.example.steam2.dao.CameraPeopleDao;
+import com.example.steam2.dao.DistanceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -19,18 +20,20 @@ public class GeneralManager {
 
 
     private final CameraPeopleDao cameraPeopleDao;
+    private final DistanceDao distanceDao;
 
 
     @Autowired
-    public GeneralManager(CameraPeopleDao cameraPeopleDao) {
+    public GeneralManager(CameraPeopleDao cameraPeopleDao, DistanceDao distanceDao) {
         this.cameraPeopleDao = cameraPeopleDao;
+        this.distanceDao = distanceDao;
     }
 
     @GetMapping("/all")
     public Map<String, Object> getLatestData(@RequestParam("number_limit") int limit){
         Map<String,Object> map=new HashMap<>();
         map.put("camera",  cameraPeopleDao.getLatestCameraPeopleNumber(limit));
-        map.put("distance", null);
+        map.put("distance", distanceDao.getLatestDistance(limit));
 
         return map;
     }
